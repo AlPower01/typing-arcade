@@ -473,7 +473,7 @@ function goBackToArcade() {
     return;
   }
 
-  window.location.href = "/";
+  window.location.href = "../";
 }
 
 ui.answerForm.addEventListener("submit", (event) => {

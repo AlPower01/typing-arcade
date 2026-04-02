@@ -36,5 +36,6 @@ function copyStandaloneGames() {
 }
 
 export default defineConfig({
+  base: "/typing-arcade/",
   plugins: [react(), copyStandaloneGames()],
 });

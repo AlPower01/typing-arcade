@@ -640,7 +640,7 @@ function goBackToArcade() {
     return;
   }
 
-  window.location.href = "/";
+  window.location.href = "../";
 }
 
 ui.startButton.addEventListener("click", () => {

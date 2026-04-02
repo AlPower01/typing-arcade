@@ -8,6 +8,13 @@ const MUSIC_STORAGE_KEY = "typing-arcade-music-enabled";
 const LEADERBOARD_STORAGE_KEY = "typing-arcade-best-scores-v2";
 const LEADERBOARD_LIMIT = 6;
 const LEADERBOARD_VISIBLE_ROWS = 5;
+const BASE_URL = import.meta.env.BASE_URL || "/";
+
+function withBase(path) {
+  const normalizedBase = BASE_URL.endsWith("/") ? BASE_URL : `${BASE_URL}/`;
+  const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
+  return `${normalizedBase}${normalizedPath}`;
+}
 
 function getStoredMusicEnabled() {
   if (typeof window === "undefined") return true;
@@ -39,31 +46,31 @@ const typingGames = [
   {
     id: "speed-run",
     title: "Speed Run",
-    thumbnail: "/images/games/speed_thumb.png",
+    thumbnail: withBase("images/games/speed_thumb.png"),
     metric: "score",
   },
   {
     id: "falling-words",
     title: "Falling Words",
-    thumbnail: "/images/games/falling_thumb.png",
+    thumbnail: withBase("images/games/falling_thumb.png"),
     metric: "score",
   },
   {
     id: "memory-typing",
     title: "Memory Typing",
-    thumbnail: "/images/games/zombie_thumb.png",
+    thumbnail: withBase("images/games/zombie_thumb.png"),
     metric: "score",
   },
   {
     id: "typing-shooter",
     title: "Typing Shooter",
-    thumbnail: "/images/games/typing_shooter.png",
+    thumbnail: withBase("images/games/typing_shooter.png"),
     metric: "score",
   },
   {
     id: "typing-dash",
     title: "Typing Dash",
-    thumbnail: "/images/games/typing_dash.png",
+    thumbnail: withBase("images/games/typing_dash.png"),
     metric: "time",
   },
 ];
@@ -387,17 +394,17 @@ export default function ArcadeLauncher() {
             <div className={`game-modal-panel ${launchStyle ? "is-launching" : ""}`} style={launchStyle || undefined}>
               <iframe
                 className="game-modal-frame"
-                src={
-                  activeModalGame === "falling-words"
-                    ? "/falling-letters/index.html?embed=1"
+                  src={
+                    activeModalGame === "falling-words"
+                    ? withBase("falling-letters/index.html?embed=1")
                     : activeModalGame === "speed-run"
-                      ? "/speed-run/index.html?embed=1"
+                      ? withBase("speed-run/index.html?embed=1")
                     : activeModalGame === "typing-dash"
-                      ? "/typing-dash/index.html?embed=1"
+                      ? withBase("typing-dash/index.html?embed=1")
                     : activeModalGame === "typing-shooter"
-                      ? "/typing-shooter/index.html?embed=1"
-                    : "/memory-typing/index.html?embed=1"
-                }
+                      ? withBase("typing-shooter/index.html?embed=1")
+                    : withBase("memory-typing/index.html?embed=1")
+                  }
                 title={
                   activeModalGame === "falling-words"
                     ? "Falling Letters"

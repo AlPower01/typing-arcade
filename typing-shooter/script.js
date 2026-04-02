@@ -1171,7 +1171,7 @@ function goBackToArcade() {
     window.parent.postMessage({ type: "typing-shooter:close" }, "*");
     return;
   }
-  window.location.href = "/";
+  window.location.href = "../";
 }
 
 document.addEventListener("visibilitychange", () => {
