@@ -52,7 +52,18 @@
           <strong id="bossWordValue">ANNIHILATION</strong>
         </div>
 
-        <div id="startOverlay" class="overlay is-visible" aria-live="polite">
+        <div id="loadingOverlay" class="overlay is-visible" aria-live="polite">
+          <div class="overlay-card loading-card">
+            <p class="overlay-kicker">Loading Mission</p>
+            <img class="start-logo" src="../images/typing_shooter_logo.png" alt="Typing Shooter" />
+            <div class="loading-bar" aria-hidden="true">
+              <span class="loading-bar-fill"></span>
+            </div>
+            <p id="loadingSummary">Preparing Typing Shooter assets...</p>
+          </div>
+        </div>
+
+        <div id="startOverlay" class="overlay" aria-live="polite">
           <div class="overlay-card">
             <p class="overlay-kicker">City Run // Level 1</p>
             <img class="start-logo" src="../images/typing_shooter_logo.png" alt="Typing Shooter" />

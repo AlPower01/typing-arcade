@@ -192,6 +192,12 @@ Error generating stack: `+i.message+`
     filter: saturate(0.84);
   }
 
+  .game-tile.is-inactive:hover,
+  .game-tile.is-inactive:focus-within {
+    opacity: 0.72;
+    filter: saturate(0.96);
+  }
+
   .thumbnail-button {
     display: block;
     width: 100%;

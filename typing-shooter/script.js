@@ -100,6 +100,8 @@ const ui = {
   topbar: document.getElementById("topbar"),
   bossBanner: document.getElementById("bossBanner"),
   bossWord: document.getElementById("bossWordValue"),
+  loadingOverlay: document.getElementById("loadingOverlay"),
+  loadingSummary: document.getElementById("loadingSummary"),
   nameEntryOverlay: document.getElementById("nameEntryOverlay"),
   nameEntrySummary: document.getElementById("nameEntrySummary"),
   nameEntryForm: document.getElementById("nameEntryForm"),
@@ -420,7 +422,6 @@ class TypingShooterGame {
       level,
       instanceMap,
       enemyConfigs,
-      bossConfig,
     } = this.content;
 
     const backgroundPath = normalizeAssetPath(manifests.backgrounds[level.backgroundId]);
@@ -438,15 +439,6 @@ class TypingShooterGame {
       this.assets.loadOptionalImage("bullet-custom", CUSTOM_ASSET_PATHS.bulletImage),
       this.assets.loadOptionalImage("boom-custom", CUSTOM_ASSET_PATHS.boomImage),
       this.assets.loadImage("bullet", bulletPath),
-      ...enemyConfigs.map((enemy) =>
-        this.assets.loadImage(`enemy:${enemy.id}`, normalizeAssetPath(manifests.characters[enemy.spriteId])),
-      ),
-      this.assets.loadImage(`boss:${bossConfig.id}`, normalizeAssetPath(manifests.characters[bossConfig.spriteId])),
-      ...Object.entries(manifests.effects).map(([effectId, effectPath]) =>
-        this.assets
-          .loadImage(`effect:${effectId}`, normalizeAssetPath(effectPath))
-          .catch(() => null),
-      ),
     ]);
 
     this.reset();
@@ -1136,9 +1128,8 @@ async function loadContent() {
   const enemyConfigs = await Promise.all(
     level.enemyPool.map((enemyId) => loadJson(`./src/content/enemies/${enemyId}.json`)),
   );
-  const bossConfig = await loadJson(`./src/content/bosses/${level.bossId.replace(/_/g, "-")}.json`);
 
-  const poolIds = [...new Set([...level.wordPools.early, ...level.wordPools.mid, ...level.wordPools.late, ...level.wordPools.boss])];
+  const poolIds = [...new Set([...level.wordPools.early, ...level.wordPools.mid, ...level.wordPools.late])];
   const wordListEntries = await Promise.all(
     poolIds.map(async (poolId) => [poolId, (await loadText(`./src/content/wordlists/${poolId}.txt`)).trim().split(/\s+/)]),
   );
@@ -1153,7 +1144,6 @@ async function loadContent() {
     },
     enemyConfigs,
     enemyConfigMap: Object.fromEntries(enemyConfigs.map((enemy) => [enemy.id, enemy])),
-    bossConfig,
     wordLists: Object.fromEntries(wordListEntries),
   };
 }
@@ -1214,10 +1204,12 @@ loadContent()
   .then(async (content) => {
     game = new TypingShooterGame(content);
     await game.init();
+    ui.loadingOverlay.classList.remove("is-visible");
+    ui.startOverlay.classList.add("is-visible");
   })
   .catch((error) => {
     console.error(error);
-    ui.startOverlay.classList.add("is-visible");
-    ui.startOverlay.querySelector(".overlay-card p").textContent = "Failed to load Typing Shooter assets.";
+    ui.loadingOverlay.classList.add("is-visible");
+    ui.loadingSummary.textContent = "Failed to load Typing Shooter assets.";
     ui.startButton.disabled = true;
   });
