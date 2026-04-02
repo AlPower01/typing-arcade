@@ -1,0 +1,20 @@
+{
+  "id": "drone_scout",
+  "name": "Drone Scout",
+  "spriteId": "enemy_drone_scout",
+  "animations": {
+    "run": "drone_hover",
+    "hit": "drone_hit",
+    "death": "drone_burst"
+  },
+  "moveSpeed": 180,
+  "spawnWeight": 4,
+  "wordDifficultyBias": 1,
+  "hitEffectId": "hit_small_blue",
+  "deathEffectId": "explosion_blue_small",
+  "tags": [
+    "air",
+    "fast"
+  ],
+  "specialBehaviorHook": null
+}

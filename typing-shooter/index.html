@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing Shooter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar" id="topbar">
+        <div>
+          <p class="eyebrow">Typing Arcade</p>
+          <h1>Typing Shooter</h1>
+          <p class="instructions">Type enemy words to fire shots, clear the wave, and survive the boss.</p>
+        </div>
+      </header>
+
+      <section class="game-panel">
+        <canvas id="gameCanvas" aria-label="Typing Shooter game board"></canvas>
+
+        <div class="bottom-bar">
+          <button id="backButton" class="arcade-button ghost" type="button">Back To Arcade</button>
+          <div class="hud" aria-label="Game stats">
+            <div class="stat-card">
+              <span class="stat-label">Score</span>
+              <strong id="scoreValue">0</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Lives</span>
+              <strong id="livesValue"></strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Wave</span>
+              <strong id="waveValue">1</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Target</span>
+              <strong id="targetValue">--</strong>
+            </div>
+          </div>
+        </div>
+
+        <div id="bossBanner" class="boss-banner" aria-live="polite">
+          <span class="boss-label">Boss Incoming</span>
+          <strong id="bossWordValue">ANNIHILATION</strong>
+        </div>
+
+        <div id="startOverlay" class="overlay is-visible" aria-live="polite">
+          <div class="overlay-card">
+            <p class="overlay-kicker">City Run // Level 1</p>
+            <img class="start-logo" src="../images/typing_shooter_logo.png" alt="Typing Shooter" />
+            <p>Pick off enemies by typing their words. Each correct letter fires a shot. Survive to face the boss.</p>
+            <button id="startButton" class="arcade-button" type="button">Start Mission</button>
+          </div>
+        </div>
+
+        <div id="nameEntryOverlay" class="overlay" aria-live="polite">
+          <div class="overlay-card">
+            <p class="overlay-kicker">New High Score</p>
+            <h2>Enter Your Name</h2>
+            <p id="nameEntrySummary">You made the leaderboard.</p>
+            <form id="nameEntryForm" class="name-entry-form" autocomplete="off">
+              <label class="visually-hidden" for="nameEntryInput">Enter your name</label>
+              <input
+                id="nameEntryInput"
+                class="name-entry-input"
+                type="text"
+                maxlength="12"
+                spellcheck="false"
+                autocapitalize="characters"
+                autocomplete="nickname"
+                placeholder="PLAYER"
+              />
+              <button class="arcade-button" type="submit">Save Score</button>
+            </form>
+          </div>
+        </div>
+
+        <div id="gameOverOverlay" class="overlay" aria-live="polite">
+          <div class="overlay-card">
+            <p class="overlay-kicker" id="gameOverKicker">Mission Failed</p>
+            <h2 id="gameOverTitle">Out of Lives</h2>
+            <p id="gameOverSummary">You scored 0 points.</p>
+            <div class="button-row">
+              <button id="restartButton" class="arcade-button" type="button">Play Again</button>
+              <button id="restartBackButton" class="arcade-button ghost" type="button">Back To Arcade</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="mobile-blocker" role="dialog" aria-modal="true" aria-labelledby="mobileBlockerTitle">
+      <div class="mobile-blocker-card">
+        <p class="mobile-blocker-kicker">Typing Arcade</p>
+        <h2 id="mobileBlockerTitle">Sorry, this doesn&apos;t work on mobile.</h2>
+        <p>Use a larger screen to play this game properly.</p>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+  </html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Speed Run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar" id="topbar">
+        <div>
+          <p class="eyebrow">Typing Arcade</p>
+          <h1>Speed Run</h1>
+          <p class="instructions">Type the oncoming word to clear the fence before it reaches you.</p>
+        </div>
+      </header>
+
+      <section class="game-panel">
+        <canvas id="gameCanvas" aria-label="Speed Run game board"></canvas>
+
+        <div class="bottom-bar">
+          <button id="backButton" class="arcade-button ghost" type="button">Back To Arcade</button>
+          <div class="hud" aria-label="Game stats">
+            <div class="stat-card">
+              <span class="stat-label">Score</span>
+              <strong id="scoreValue">0</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Lives</span>
+              <strong id="livesValue"></strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Level</span>
+              <strong id="levelValue">1</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Streak</span>
+              <strong id="streakValue">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <div id="startOverlay" class="overlay is-visible">
+          <div class="overlay-card">
+            <p class="overlay-kicker">Ready Player One</p>
+            <img class="start-logo" src="./images/logo.png" alt="Speed Run" />
+            <p>Type each incoming word in time to clear the fence and launch the jump.</p>
+            <button id="startButton" class="arcade-button" type="button">Start Game</button>
+          </div>
+        </div>
+
+        <div id="gameOverOverlay" class="overlay" aria-live="polite">
+          <div class="overlay-card">
+            <p class="overlay-kicker">Run Over</p>
+            <h2 id="gameOverTitle">Out of Lives</h2>
+            <p id="gameOverSummary">You made it 0 points.</p>
+            <div class="button-row">
+              <button id="restartButton" class="arcade-button" type="button">Restart</button>
+              <button id="restartBackButton" class="arcade-button ghost" type="button">Back To Arcade</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="nameEntryOverlay" class="overlay" aria-live="polite">
+          <div class="overlay-card">
+            <p class="overlay-kicker">New High Score</p>
+            <h2>Enter Your Name</h2>
+            <p id="nameEntrySummary">You made the leaderboard.</p>
+            <form id="nameEntryForm" class="name-entry-form" autocomplete="off">
+              <label class="visually-hidden" for="nameEntryInput">Enter your name</label>
+              <input
+                id="nameEntryInput"
+                class="name-entry-input"
+                type="text"
+                maxlength="12"
+                spellcheck="false"
+                autocapitalize="characters"
+                autocomplete="nickname"
+                placeholder="PLAYER"
+              />
+              <button class="arcade-button" type="submit">Save Score</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="mobile-blocker" role="dialog" aria-modal="true" aria-labelledby="mobileBlockerTitle">
+      <div class="mobile-blocker-card">
+        <p class="mobile-blocker-kicker">Typing Arcade</p>
+        <h2 id="mobileBlockerTitle">Sorry, this doesn&apos;t work on mobile.</h2>
+        <p>Use a larger screen to play this game properly.</p>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+  </html>

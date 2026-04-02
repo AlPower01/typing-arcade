@@ -1,0 +1,479 @@
+:root {
+  color-scheme: dark;
+  --bg: #101c43;
+  --panel: rgba(15, 28, 66, 0.86);
+  --panel-strong: rgba(11, 21, 52, 0.96);
+  --line: rgba(255, 255, 255, 0.14);
+  --text: #f7fbff;
+  --muted: #d2def4;
+  --yellow: #ffd24f;
+  --orange: #ff9751;
+  --green: #46db7f;
+  --red: #ff6d6d;
+  --shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+}
+
+.mobile-blocker {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(8, 10, 22, 0.9);
+  backdrop-filter: blur(14px);
+}
+
+.mobile-blocker-card {
+  width: min(420px, 100%);
+  padding: 28px 24px;
+  text-align: center;
+  border-radius: 24px;
+  border: 2px solid rgba(255, 214, 126, 0.34);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+    linear-gradient(180deg, rgba(22, 25, 58, 0.98), rgba(8, 10, 28, 0.98));
+  box-shadow:
+    0 26px 68px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.mobile-blocker-kicker {
+  margin: 0 0 10px;
+  color: #ffd879;
+  font-family: "Courier New", "Lucida Console", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.mobile-blocker-card h2 {
+  margin: 0 0 10px;
+  color: #fff1ba;
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  line-height: 1.15;
+}
+
+.mobile-blocker-card p:last-child {
+  margin: 0;
+  color: #cbd3f1;
+}
+
+@media (max-width: 820px) {
+  .mobile-blocker {
+    display: flex;
+  }
+
+  .app-shell {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top, rgba(115, 172, 255, 0.14), transparent 34%),
+    linear-gradient(180deg, #12265b 0%, #0d1737 100%);
+  color: var(--text);
+  font-family: "Chakra Petch", "Segoe UI", sans-serif;
+}
+
+body {
+  display: flex;
+}
+
+.app-shell {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+body.is-embedded .app-shell {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+
+body.is-embedded .game-panel {
+  min-height: 100vh;
+  border-radius: 0;
+  border: 0;
+}
+
+body.is-embedded #gameCanvas {
+  height: 100vh;
+}
+
+.topbar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #b7d5ff;
+}
+
+.topbar h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  line-height: 0.95;
+  font-family: "Chakra Petch", "Segoe UI", sans-serif;
+  font-weight: 700;
+}
+
+.instructions {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.hud {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(100px, 1fr));
+  gap: 12px;
+}
+
+.stat-card {
+  min-width: 104px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+    linear-gradient(180deg, var(--panel), var(--panel-strong));
+  box-shadow: var(--shadow);
+}
+
+.stat-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #bcd3fb;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.stat-card strong {
+  font-size: 1.5rem;
+  font-family: "Chakra Petch", "Segoe UI", sans-serif;
+  font-weight: 700;
+}
+
+.game-panel {
+  position: relative;
+  min-height: 680px;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+    linear-gradient(180deg, rgba(15, 28, 66, 0.88), rgba(10, 18, 42, 0.96));
+  box-shadow: var(--shadow);
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 680px;
+}
+
+.bottom-bar {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  z-index: 4;
+}
+
+.hud.compact {
+  grid-template-columns: repeat(4, minmax(92px, 1fr));
+  gap: 10px;
+}
+
+.hud.compact .stat-card {
+  min-width: 92px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+    linear-gradient(180deg, rgba(13, 23, 52, 0.9), rgba(8, 14, 34, 0.96));
+  backdrop-filter: blur(10px);
+}
+
+.hud.compact strong {
+  font-size: 1.2rem;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 12, 27, 0.48);
+  backdrop-filter: blur(8px);
+}
+
+.overlay.is-visible {
+  display: flex;
+}
+
+.overlay-card {
+  width: min(440px, calc(100% - 32px));
+  padding: 28px;
+  text-align: center;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    linear-gradient(180deg, rgba(17, 33, 74, 0.94), rgba(10, 18, 42, 0.98));
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.32);
+}
+
+.overlay-kicker {
+  margin: 0 0 6px;
+  color: #bcd3fb;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.76rem;
+}
+
+.overlay-card h2 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+  font-family: "Chakra Petch", "Segoe UI", sans-serif;
+  font-weight: 700;
+}
+
+.overlay-card p {
+  margin: 0 0 18px;
+  color: var(--muted);
+}
+
+#startOverlay .overlay-card {
+  border: 3px solid rgba(118, 207, 255, 0.26);
+  background:
+    radial-gradient(circle at top, rgba(92, 214, 255, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    linear-gradient(180deg, rgba(20, 35, 86, 0.96), rgba(9, 14, 38, 0.98));
+  box-shadow:
+    0 26px 68px rgba(0, 0, 0, 0.38),
+    inset 0 0 0 2px rgba(190, 239, 255, 0.07),
+    inset 0 0 0 8px rgba(10, 14, 34, 0.9);
+}
+
+.start-logo {
+  display: block;
+  width: min(240px, 78%);
+  margin: 4px auto 14px;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.3));
+}
+
+#startOverlay .overlay-kicker {
+  color: #89e7ff;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.68rem;
+}
+
+#startOverlay .overlay-card h2 {
+  color: #f1fbff;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  line-height: 1.35;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+  margin-top: 0;
+}
+
+#gameOverOverlay .overlay-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid rgba(255, 214, 117, 0.34);
+  background:
+    radial-gradient(circle at top, rgba(255, 197, 88, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    linear-gradient(180deg, rgba(21, 29, 78, 0.96), rgba(9, 14, 38, 0.98));
+  box-shadow:
+    0 26px 68px rgba(0, 0, 0, 0.38),
+    inset 0 0 0 2px rgba(255, 232, 172, 0.08),
+    inset 0 0 0 8px rgba(10, 14, 34, 0.92);
+}
+
+#gameOverOverlay .overlay-card p {
+  margin-bottom: 20px;
+}
+
+#gameOverOverlay .overlay-kicker {
+  color: #ffd979;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.72rem;
+}
+
+#gameOverOverlay .overlay-card h2 {
+  color: #fff1a8;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.3;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+}
+
+#gameOverOverlay .overlay-card .arcade-button {
+  min-width: 0;
+}
+
+#gameOverOverlay .overlay-card .button-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.name-entry-form {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+}
+
+.name-entry-input {
+  width: 100%;
+  min-height: 72px;
+  padding: 0 22px;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 213, 90, 0.52);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+    rgba(10, 18, 42, 0.96);
+  color: #fff4c8;
+  text-align: center;
+  text-transform: uppercase;
+  font: 700 clamp(1.2rem, 2vw, 1.7rem) / 1 "Press Start 2P", monospace;
+  letter-spacing: 0.12em;
+}
+
+.name-entry-input:focus {
+  outline: 2px solid rgba(255, 213, 90, 0.78);
+  outline-offset: 3px;
+}
+
+.arcade-button {
+  min-width: 180px;
+  min-height: 52px;
+  padding: 0 20px;
+  border: 2px solid rgba(98, 57, 9, 0.62);
+  border-radius: 10px;
+  background: #f3b544;
+  color: #331500;
+  font: 700 0.96rem/1 "Chakra Petch", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -3px 0 rgba(112, 45, 6, 0.28),
+    0 5px 0 rgba(92, 42, 9, 0.88),
+    0 10px 18px rgba(0, 0, 0, 0.2);
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+}
+
+.arcade-button:hover,
+.arcade-button:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
+  filter: brightness(1.02);
+}
+
+.arcade-button:active {
+  transform: translateY(3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -2px 0 rgba(112, 45, 6, 0.28),
+    0 2px 0 rgba(92, 42, 9, 0.88),
+    0 8px 14px rgba(0, 0, 0, 0.24);
+}
+
+.arcade-button.ghost {
+  background: rgba(10, 18, 42, 0.86);
+  color: #f7fbff;
+  border-color: rgba(178, 205, 255, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 5px 0 rgba(22, 31, 64, 0.92),
+    0 10px 18px rgba(0, 0, 0, 0.18);
+}
+
+#livesValue {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+}
+
+.life-heart {
+  width: 18px;
+  height: 18px;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .hud {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    padding: 16px;
+  }
+
+  .game-panel,
+  #gameCanvas {
+    min-height: 560px;
+    height: 560px;
+  }
+
+  .bottom-bar {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+
+
+  .hud.compact {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #gameOverOverlay .overlay-card .button-row {
+    width: 100%;
+    flex-direction: column;
+  }
+}

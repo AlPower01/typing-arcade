@@ -1,0 +1,652 @@
+:root {
+  color-scheme: light;
+  --text: #f7f0c8;
+  --muted: #b7bdd6;
+  --gold: #ffcb2f;
+  --ink: #0d122a;
+  --panel-blue: #171d49;
+  --panel-blue-2: #222b64;
+  --panel-line: #7384d9;
+  --shadow: 0 26px 70px rgba(6, 9, 22, 0.35);
+}
+
+.mobile-blocker {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(8, 10, 22, 0.9);
+  backdrop-filter: blur(14px);
+}
+
+.mobile-blocker-card {
+  width: min(420px, 100%);
+  padding: 28px 24px;
+  text-align: center;
+  border-radius: 24px;
+  border: 2px solid rgba(255, 214, 126, 0.34);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+    linear-gradient(180deg, rgba(22, 25, 58, 0.98), rgba(8, 10, 28, 0.98));
+  box-shadow:
+    0 26px 68px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.mobile-blocker-kicker {
+  margin: 0 0 10px;
+  color: #ffd879;
+  font-family: "Courier New", "Lucida Console", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.mobile-blocker-card h2 {
+  margin: 0 0 10px;
+  color: #fff1ba;
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  line-height: 1.15;
+}
+
+.mobile-blocker-card p:last-child {
+  margin: 0;
+  color: #cbd3f1;
+}
+
+@media (max-width: 820px) {
+  .mobile-blocker {
+    display: flex;
+  }
+
+  .app-shell {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top, rgba(103, 212, 255, 0.16), transparent 28%),
+    linear-gradient(180deg, #151b46 0%, #0c1230 100%);
+  color: var(--text);
+  font-family: "Chakra Petch", "Segoe UI", sans-serif;
+}
+
+body {
+  display: flex;
+}
+
+.app-shell {
+  width: min(1320px, 100%);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+body.is-embedded .app-shell {
+  width: 100%;
+  padding: 0;
+}
+
+.topbar {
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #8de8ff;
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.dash-logo {
+  display: block;
+  width: min(280px, 60vw);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.14));
+}
+
+.game-panel {
+  position: relative;
+  min-height: 760px;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 3px solid rgba(115, 132, 217, 0.36);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
+    linear-gradient(180deg, #1b2358 0%, #121838 100%);
+  box-shadow:
+    var(--shadow),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.05),
+    inset 0 0 0 10px rgba(10, 12, 28, 0.7);
+}
+
+body.is-embedded .game-panel {
+  min-height: 100vh;
+  border-radius: 0;
+}
+
+.race-scene {
+  position: relative;
+  min-height: 760px;
+  --runner-progress: 0;
+  --runner-bob-ms: 260ms;
+  --bg-pan: 0px;
+  --race-start: 11%;
+  --race-finish: 93%;
+  --runner-ground: 420px;
+}
+
+body.is-embedded .race-scene {
+  min-height: 100vh;
+}
+
+.track-surface {
+  position: absolute;
+  inset: 0;
+  background:
+    url("./images/bg_race.png"),
+    radial-gradient(circle at top, rgba(255, 246, 160, 0.16), transparent 18%),
+    linear-gradient(180deg, #67b4ff 0%, #9ed9ff 28%, #5d9c39 28%, #467c28 62%, #7d2a16 62%, #9e361c 100%);
+  background-repeat: no-repeat;
+  background-size: cover, auto, auto;
+  background-position: center calc(50% - 220px), center top, center center;
+  transition: filter 180ms ease, transform 180ms ease;
+}
+
+.track-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0 50%, rgba(0, 0, 0, 0.04) 50% 100%);
+  background-size: 100% 6px;
+  opacity: 0.26;
+  pointer-events: none;
+}
+
+.race-scene.is-preview .track-surface,
+.race-scene.is-preview .bottom-dock {
+  filter: blur(10px);
+  transform: scale(1.02);
+}
+
+.runner {
+  position: absolute;
+  left: calc(var(--race-start) + var(--runner-progress) * (var(--race-finish) - var(--race-start)));
+  bottom: var(--runner-ground);
+  width: 156px;
+  height: 156px;
+  transform: translateX(-50%);
+  transition: left 90ms linear;
+  filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.2));
+}
+
+.runner.is-running .runner-sprite {
+  animation: runnerBob var(--runner-bob-ms) linear infinite;
+}
+
+.runner-shadow {
+  position: absolute;
+  left: 38px;
+  right: 34px;
+  bottom: 10px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.22);
+  filter: blur(4px);
+}
+
+.runner-sprite {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom left;
+  transform-origin: center bottom;
+  image-rendering: pixelated;
+  user-select: none;
+  pointer-events: none;
+}
+
+.bottom-dock {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 34px;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 44px;
+  align-items: end;
+  transition: filter 180ms ease, transform 180ms ease;
+}
+
+.sentence-card,
+.time-card {
+  position: relative;
+  min-height: 164px;
+  border: 3px solid rgba(255, 206, 110, 0.34);
+  background:
+    linear-gradient(180deg, rgba(255, 233, 170, 0.06), rgba(255, 255, 255, 0.01)),
+    linear-gradient(180deg, #24162f 0%, #161c46 52%, #0c1230 100%);
+  box-shadow:
+    0 22px 40px rgba(8, 12, 30, 0.34),
+    inset 0 1px 0 rgba(255, 240, 190, 0.08),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.04),
+    inset 0 0 0 7px rgba(9, 11, 28, 0.58);
+  overflow: hidden;
+}
+
+.sentence-card::before,
+.time-card::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 233, 194, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 26%),
+    repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.014) 0 2px,
+      transparent 2px 5px
+    );
+  pointer-events: none;
+}
+
+.sentence-card::after,
+.time-card::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 18px;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 182, 73, 0.12), rgba(255, 224, 145, 0.4), rgba(255, 182, 73, 0.12));
+  box-shadow: 0 0 18px rgba(255, 201, 86, 0.16);
+  pointer-events: none;
+}
+
+.sentence-card {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  padding: 34px 34px 28px;
+  text-align: left;
+  cursor: text;
+  overflow: hidden;
+}
+
+.time-card {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  padding: 34px 24px 26px;
+}
+
+.dock-label {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-bottom: 16px;
+  color: #ffe48f;
+  font: 400 clamp(0.88rem, 1.2vw, 1rem) / 1.2 "Press Start 2P", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.passage-viewport {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 2px solid rgba(110, 128, 222, 0.22);
+  background:
+    linear-gradient(180deg, rgba(9, 12, 30, 0.96), rgba(18, 24, 56, 0.94));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    inset 0 10px 18px rgba(255, 255, 255, 0.02);
+}
+
+.passage-text {
+  display: inline-block;
+  width: max-content;
+  white-space: nowrap;
+  font: 400 clamp(1.7rem, 3vw, 2.5rem) / 1.2 "Courier New", "Lucida Console", monospace;
+  color: #6975b1;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.22);
+}
+
+.char {
+  position: relative;
+}
+
+.char.is-correct {
+  color: #fff3c8;
+  font-weight: 700;
+}
+
+.char.is-current {
+  color: #fff8df;
+  background: rgba(103, 212, 255, 0.18);
+  box-shadow: inset 0 -3px 0 rgba(103, 212, 255, 0.78);
+}
+
+.char.is-current.is-blocked {
+  color: #ffd9d9;
+  background: rgba(255, 109, 109, 0.22);
+  box-shadow: inset 0 -3px 0 rgba(198, 34, 34, 0.8);
+}
+
+.char.is-incorrect {
+  color: #ffb8b8;
+  background: rgba(255, 109, 109, 0.18);
+  box-shadow: inset 0 -3px 0 rgba(208, 75, 75, 0.42);
+}
+
+.time-card strong {
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  color: #fff0bf;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  line-height: 1.3;
+  padding: 14px 16px;
+  width: 100%;
+  border-radius: 16px;
+  border: 2px solid rgba(110, 128, 222, 0.22);
+  background: linear-gradient(180deg, rgba(9, 12, 30, 0.96), rgba(18, 24, 56, 0.94));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    inset 0 10px 18px rgba(255, 255, 255, 0.02);
+}
+
+.sentence-card:focus-visible {
+  outline: 2px solid rgba(75, 157, 255, 0.58);
+  outline-offset: 0;
+}
+
+.typing-input,
+.name-input {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 212, 95, 0.32);
+  background: rgba(255, 255, 255, 0.96);
+  color: #1a2146;
+  font: 600 1rem/1.5 "Chakra Petch", sans-serif;
+  resize: none;
+}
+
+.typing-input {
+  position: absolute;
+  inset: auto auto 16px 16px;
+  width: 1px;
+  height: 1px;
+  min-height: 1px;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.typing-input:focus,
+.name-input:focus {
+  outline: 2px solid rgba(75, 157, 255, 0.52);
+  outline-offset: 3px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(7, 10, 24, 0.54);
+  backdrop-filter: blur(10px);
+}
+
+.overlay.is-visible {
+  display: flex;
+}
+
+.overlay-card {
+  width: min(520px, calc(100% - 32px));
+  padding: 30px;
+  text-align: center;
+  border-radius: 24px;
+  border: 3px solid rgba(115, 132, 217, 0.42);
+  background:
+    radial-gradient(circle at top, rgba(103, 212, 255, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(35, 43, 97, 0.98), rgba(15, 20, 48, 0.98));
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.38),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.04),
+    inset 0 0 0 8px rgba(10, 12, 30, 0.42);
+}
+
+.overlay-kicker {
+  margin: 0 0 10px;
+  color: #8de8ff;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.overlay-card h2 {
+  margin: 0 0 14px;
+  color: #fff0bf;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(1.28rem, 2.8vw, 1.8rem);
+  line-height: 1.35;
+}
+
+.start-logo {
+  display: block;
+  width: min(260px, 82%);
+  margin: 4px auto 16px;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.16));
+}
+
+.overlay-card p {
+  margin: 0 0 20px;
+  color: #c1c8e3;
+}
+
+.name-form {
+  display: grid;
+  gap: 14px;
+}
+
+.name-input {
+  min-height: 68px;
+  text-align: center;
+  text-transform: uppercase;
+  font: 700 clamp(1.1rem, 2vw, 1.4rem) / 1 "Press Start 2P", monospace;
+  letter-spacing: 0.12em;
+}
+
+.name-input::placeholder {
+  color: rgba(26, 33, 70, 0.5);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.result-card {
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(149, 170, 255, 0.18);
+  background: rgba(33, 41, 89, 0.88);
+}
+
+.result-card span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.result-card strong {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.result-rank {
+  color: #ffe48f;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.82rem;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.arcade-button {
+  min-width: 180px;
+  min-height: 52px;
+  padding: 0 20px;
+  border: 2px solid rgba(98, 57, 9, 0.62);
+  border-radius: 10px;
+  background: #f3b544;
+  color: #331500;
+  font: 700 0.94rem/1 "Chakra Petch", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -3px 0 rgba(112, 45, 6, 0.28),
+    0 5px 0 rgba(92, 42, 9, 0.88),
+    0 10px 18px rgba(0, 0, 0, 0.12);
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+}
+
+.arcade-button:hover,
+.arcade-button:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
+  filter: brightness(1.02);
+}
+
+.arcade-button:active {
+  transform: translateY(3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -2px 0 rgba(112, 45, 6, 0.28),
+    0 2px 0 rgba(92, 42, 9, 0.88),
+    0 8px 14px rgba(0, 0, 0, 0.16);
+}
+
+.arcade-button.ghost {
+  background: rgba(234, 242, 250, 0.92);
+  color: #213a5b;
+  border-color: rgba(131, 165, 205, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 5px 0 rgba(175, 196, 219, 0.88),
+    0 10px 18px rgba(0, 0, 0, 0.08);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes runnerBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes legFront {
+  0%,
+  100% {
+    transform: rotate(-26deg);
+  }
+  50% {
+    transform: rotate(38deg);
+  }
+}
+
+@keyframes legBack {
+  0%,
+  100% {
+    transform: rotate(26deg);
+  }
+  50% {
+    transform: rotate(-38deg);
+  }
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding: 16px;
+  }
+
+  .game-panel,
+  .race-scene {
+    min-height: 100vh;
+  }
+
+  .bottom-dock {
+    left: 16px;
+    right: 16px;
+    bottom: 24px;
+    grid-template-columns: 1fr;
+  }
+
+  .race-scene {
+    --race-start: 13%;
+    --race-finish: 91%;
+    --runner-ground: 350px;
+  }
+
+  .time-card {
+    min-height: 120px;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .overlay-card {
+    padding: 22px;
+  }
+}

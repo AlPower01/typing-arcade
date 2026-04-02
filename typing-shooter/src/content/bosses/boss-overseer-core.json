@@ -1,0 +1,25 @@
+{
+  "id": "boss_overseer_core",
+  "name": "Overseer Core",
+  "spriteId": "boss_overseer_core",
+  "animations": {
+    "intro": "overseer_intro",
+    "idle": "overseer_idle",
+    "hit": "overseer_hit",
+    "death": "overseer_death"
+  },
+  "bossWordMode": "multiPhaseWords",
+  "wordData": {
+    "phases": [
+      "countermeasure",
+      "hyperreactivity"
+    ]
+  },
+  "hitEffectId": "hit_boss_electric",
+  "deathEffectId": "explosion_boss_lab",
+  "bonusScore": 1500,
+  "behaviorMetadata": {
+    "moveSpeed": 40,
+    "screenHoldPosition": 0.82
+  }
+}

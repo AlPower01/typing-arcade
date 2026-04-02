@@ -1,0 +1,20 @@
+{
+  "id": "bio_tank",
+  "name": "Bio Tank",
+  "spriteId": "enemy_bio_tank",
+  "animations": {
+    "run": "bio_tank_roll",
+    "hit": "bio_tank_hit",
+    "death": "bio_tank_death"
+  },
+  "moveSpeed": 120,
+  "spawnWeight": 2,
+  "wordDifficultyBias": 3,
+  "hitEffectId": "hit_heavy",
+  "deathEffectId": "explosion_lab_large",
+  "tags": [
+    "ground",
+    "heavy"
+  ],
+  "specialBehaviorHook": null
+}

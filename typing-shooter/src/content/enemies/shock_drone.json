@@ -1,0 +1,20 @@
+{
+  "id": "shock_drone",
+  "name": "Shock Drone",
+  "spriteId": "enemy_shock_drone",
+  "animations": {
+    "run": "shock_drone_hover",
+    "hit": "shock_drone_hit",
+    "death": "shock_drone_burst"
+  },
+  "moveSpeed": 210,
+  "spawnWeight": 3,
+  "wordDifficultyBias": 2,
+  "hitEffectId": "hit_electric",
+  "deathEffectId": "explosion_lab",
+  "tags": [
+    "air",
+    "fast"
+  ],
+  "specialBehaviorHook": "zigzagHover"
+}

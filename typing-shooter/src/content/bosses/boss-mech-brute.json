@@ -1,0 +1,22 @@
+{
+  "id": "boss_mech_brute",
+  "name": "Mech Brute",
+  "spriteId": "boss_mech_brute",
+  "animations": {
+    "intro": "boss_mech_intro",
+    "idle": "boss_mech_idle",
+    "hit": "boss_mech_hit",
+    "death": "boss_mech_death"
+  },
+  "bossWordMode": "singleLongWord",
+  "wordData": {
+    "value": "annihilation"
+  },
+  "hitEffectId": "hit_boss_heavy",
+  "deathEffectId": "explosion_boss_large",
+  "bonusScore": 1000,
+  "behaviorMetadata": {
+    "moveSpeed": 70,
+    "screenHoldPosition": 0.75
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "sand_raider",
+  "name": "Sand Raider",
+  "spriteId": "enemy_sand_raider",
+  "animations": {
+    "run": "sand_raider_run",
+    "hit": "sand_raider_hit",
+    "death": "sand_raider_death"
+  },
+  "moveSpeed": 165,
+  "spawnWeight": 5,
+  "wordDifficultyBias": 1,
+  "hitEffectId": "hit_dust",
+  "deathEffectId": "explosion_sand",
+  "tags": [
+    "ground",
+    "basic"
+  ],
+  "specialBehaviorHook": null
+}

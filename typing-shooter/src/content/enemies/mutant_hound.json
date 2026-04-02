@@ -1,0 +1,20 @@
+{
+  "id": "mutant_hound",
+  "name": "Mutant Hound",
+  "spriteId": "enemy_mutant_hound",
+  "animations": {
+    "run": "hound_run",
+    "hit": "hound_hit",
+    "death": "hound_burst"
+  },
+  "moveSpeed": 200,
+  "spawnWeight": 3,
+  "wordDifficultyBias": 1,
+  "hitEffectId": "hit_small_red",
+  "deathEffectId": "explosion_small",
+  "tags": [
+    "ground",
+    "rush"
+  ],
+  "specialBehaviorHook": "rushWhenClose"
+}

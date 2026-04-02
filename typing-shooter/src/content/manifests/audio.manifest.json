@@ -1,0 +1,8 @@
+{
+  "music_city_run": "assets/audio/music/music_city_run.placeholder.txt",
+  "music_desert_assault": "assets/audio/music/music_desert_assault.placeholder.txt",
+  "music_lab_escape": "assets/audio/music/music_lab_escape.placeholder.txt",
+  "sfx_letter_hit": "assets/audio/sfx/sfx_letter_hit.placeholder.txt",
+  "sfx_enemy_explode": "assets/audio/sfx/sfx_enemy_explode.placeholder.txt",
+  "sfx_boss_explode": "assets/audio/sfx/sfx_boss_explode.placeholder.txt"
+}
