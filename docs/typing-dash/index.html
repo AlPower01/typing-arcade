@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing Dash</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar" id="topbar">
+        <p class="eyebrow">Typing Arcade</p>
+        <img class="dash-logo" src="./images/dash_logo.png" alt="Typing Dash" />
+      </header>
+
+      <section class="game-panel">
+        <div id="raceScene" class="race-scene" data-scene="start">
+          <div class="track-surface" aria-hidden="true">
+            <div id="runner" class="runner" aria-hidden="true">
+              <span class="runner-shadow"></span>
+              <img id="runnerSprite" class="runner-sprite" src="./images/stand.png" alt="" />
+            </div>
+          </div>
+
+          <div class="bottom-dock">
+            <button id="passagePanel" class="sentence-card" type="button" aria-label="Focus typing input">
+              <span class="dock-label"><span id="wordCountValue">0</span> / 50 words</span>
+              <div id="passageViewport" class="passage-viewport">
+                <div id="passageText" class="passage-text"></div>
+              </div>
+            </button>
+
+            <aside class="time-card" aria-label="Run timer">
+              <span class="dock-label">Time</span>
+              <strong id="timeValue">0.000s</strong>
+            </aside>
+          </div>
+
+          <label class="visually-hidden" for="typingInput">Type the passage here</label>
+          <textarea
+            id="typingInput"
+            class="typing-input"
+            rows="2"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            placeholder="Type the passage"
+          ></textarea>
+        </div>
+
+        <div id="startOverlay" class="overlay is-visible" aria-live="polite">
+          <div class="overlay-card">
+            <p class="overlay-kicker">50-Word Sprint</p>
+            <img class="start-logo" src="./images/dash_logo.png" alt="Typing Dash" />
+            <p>Type the full 50-word passage as fast as you can. The timer starts on your first keystroke.</p>
+            <div class="button-row">
+              <button id="startButton" class="arcade-button" type="button">Start Race</button>
+              <button id="startBackButton" class="arcade-button ghost" type="button">Back To Arcade</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="nameEntryOverlay" class="overlay" aria-live="polite">
+          <div class="overlay-card">
+            <p class="overlay-kicker">New High Score</p>
+            <h2>Enter Your Name</h2>
+            <p id="nameEntrySummary">You made the leaderboard.</p>
+            <form id="nameEntryForm" class="name-form" autocomplete="off">
+              <label class="visually-hidden" for="nameEntryInput">Player name</label>
+              <input
+                id="nameEntryInput"
+                class="name-input"
+                type="text"
+                maxlength="12"
+                spellcheck="false"
+                autocapitalize="characters"
+                autocomplete="nickname"
+                placeholder="PLAYER"
+              />
+              <button class="arcade-button" type="submit">Save Score</button>
+            </form>
+          </div>
+        </div>
+
+        <div id="gameOverOverlay" class="overlay" aria-live="polite">
+          <div class="overlay-card">
+            <p class="overlay-kicker">Race Complete</p>
+            <h2>Results</h2>
+            <div class="results-grid">
+              <div class="result-card">
+                <span>Time</span>
+                <strong id="resultTimeValue">0.000s</strong>
+              </div>
+              <div class="result-card">
+                <span>WPM</span>
+                <strong id="resultWpmValue">0</strong>
+              </div>
+              <div class="result-card">
+                <span>Accuracy</span>
+                <strong id="resultAccuracyValue">0%</strong>
+              </div>
+              <div class="result-card">
+                <span>Mistakes</span>
+                <strong id="resultMistakesValue">0</strong>
+              </div>
+            </div>
+            <p id="resultRankValue" class="result-rank">Leaderboard rank: --</p>
+            <div class="button-row">
+              <button id="replayButton" class="arcade-button" type="button">Race Again</button>
+              <button id="resultsBackButton" class="arcade-button ghost" type="button">Back To Arcade</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="mobile-blocker" role="dialog" aria-modal="true" aria-labelledby="mobileBlockerTitle">
+      <div class="mobile-blocker-card">
+        <p class="mobile-blocker-kicker">Typing Arcade</p>
+        <h2 id="mobileBlockerTitle">Sorry, this doesn&apos;t work on mobile.</h2>
+        <p>Use a larger screen to play this game properly.</p>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+  </html>

@@ -1,0 +1,57 @@
+{
+  "id": "level-03",
+  "name": "Lab Breakout",
+  "order": 3,
+  "backgroundId": "bg_lab_alarm",
+  "musicId": "music_lab_escape",
+  "playerSkinId": "player_runner_stealth",
+  "enemyPool": [
+    "lab_guard",
+    "shock_drone",
+    "bio_tank"
+  ],
+  "bossId": "boss_overseer_core",
+  "wordPools": {
+    "early": [
+      "easy-common",
+      "level-03-theme"
+    ],
+    "mid": [
+      "medium-common",
+      "level-03-theme"
+    ],
+    "late": [
+      "hard-common",
+      "level-03-theme"
+    ],
+    "boss": [
+      "boss-level-03"
+    ]
+  },
+  "spawnRules": {
+    "baseRate": 1.6,
+    "rateRampPerMinute": 0.45,
+    "maxConcurrentEnemies": 7,
+    "bossSpawnTimeSec": 100
+  },
+  "difficultyRules": {
+    "startWordLength": 4,
+    "maxWordLength": 13,
+    "wordComplexityRamp": 1.4,
+    "enemyVarietyUnlockTimeSec": 30
+  },
+  "scoringRules": {
+    "pointsPerLetterHit": 14,
+    "pointsPerEnemyKill": 75,
+    "pointsPerBossKill": 1500,
+    "comboBonusPerTier": 40
+  },
+  "lifeRules": {
+    "startingLives": 3,
+    "damageOnEnemyReachPlayer": 1
+  },
+  "completionRules": {
+    "bossRequired": true,
+    "autoAdvanceOnBossDefeat": false
+  }
+}

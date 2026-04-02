@@ -17,7 +17,7 @@ function copyStandaloneGames() {
     name: "copy-standalone-games",
     writeBundle() {
       const rootDir = process.cwd();
-      const distDir = resolve(rootDir, "dist");
+      const distDir = resolve(rootDir, "docs");
 
       for (const dir of staticDirs) {
         const sourceDir = resolve(rootDir, dir);
@@ -37,5 +37,9 @@ function copyStandaloneGames() {
 
 export default defineConfig({
   base: "/typing-arcade/",
+  build: {
+    outDir: "docs",
+    emptyOutDir: true,
+  },
   plugins: [react(), copyStandaloneGames()],
 });

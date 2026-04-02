@@ -1,0 +1,20 @@
+{
+  "id": "street_thug",
+  "name": "Street Thug",
+  "spriteId": "enemy_street_thug",
+  "animations": {
+    "run": "street_thug_run",
+    "hit": "street_thug_hit",
+    "death": "street_thug_death"
+  },
+  "moveSpeed": 150,
+  "spawnWeight": 5,
+  "wordDifficultyBias": 0,
+  "hitEffectId": "hit_small",
+  "deathEffectId": "explosion_small",
+  "tags": [
+    "ground",
+    "basic"
+  ],
+  "specialBehaviorHook": null
+}

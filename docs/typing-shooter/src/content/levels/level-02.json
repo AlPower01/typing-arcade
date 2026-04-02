@@ -1,0 +1,57 @@
+{
+  "id": "level-02",
+  "name": "Desert Siege",
+  "order": 2,
+  "backgroundId": "bg_desert_dusk",
+  "musicId": "music_desert_assault",
+  "playerSkinId": "player_runner_desert",
+  "enemyPool": [
+    "sand_raider",
+    "scorpion_bot",
+    "dune_gunner"
+  ],
+  "bossId": "boss_siege_crawler",
+  "wordPools": {
+    "early": [
+      "easy-common",
+      "level-02-theme"
+    ],
+    "mid": [
+      "medium-common",
+      "level-02-theme"
+    ],
+    "late": [
+      "hard-common",
+      "level-02-theme"
+    ],
+    "boss": [
+      "boss-level-02"
+    ]
+  },
+  "spawnRules": {
+    "baseRate": 1.4,
+    "rateRampPerMinute": 0.4,
+    "maxConcurrentEnemies": 6,
+    "bossSpawnTimeSec": 95
+  },
+  "difficultyRules": {
+    "startWordLength": 4,
+    "maxWordLength": 11,
+    "wordComplexityRamp": 1.2,
+    "enemyVarietyUnlockTimeSec": 35
+  },
+  "scoringRules": {
+    "pointsPerLetterHit": 12,
+    "pointsPerEnemyKill": 60,
+    "pointsPerBossKill": 1200,
+    "comboBonusPerTier": 30
+  },
+  "lifeRules": {
+    "startingLives": 3,
+    "damageOnEnemyReachPlayer": 1
+  },
+  "completionRules": {
+    "bossRequired": true,
+    "autoAdvanceOnBossDefeat": true
+  }
+}

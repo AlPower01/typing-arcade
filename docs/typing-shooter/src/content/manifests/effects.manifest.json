@@ -1,0 +1,23 @@
+{
+  "bullet_default": "assets/effects/bullets/bullet_default.svg",
+  "bullet_desert": "assets/effects/bullets/bullet_desert.svg",
+  "bullet_lab": "assets/effects/bullets/bullet_lab.svg",
+  "hit_small": "assets/effects/hits/hit_small.svg",
+  "hit_small_blue": "assets/effects/hits/hit_small_blue.svg",
+  "hit_small_red": "assets/effects/hits/hit_small_red.svg",
+  "hit_dust": "assets/effects/hits/hit_dust.svg",
+  "hit_orange": "assets/effects/hits/hit_orange.svg",
+  "hit_electric": "assets/effects/hits/hit_electric.svg",
+  "hit_heavy": "assets/effects/hits/hit_heavy.svg",
+  "hit_boss_heavy": "assets/effects/hits/hit_boss_heavy.svg",
+  "hit_boss_electric": "assets/effects/hits/hit_boss_electric.svg",
+  "explosion_small": "assets/effects/explosions/explosion_small.svg",
+  "explosion_blue_small": "assets/effects/explosions/explosion_blue_small.svg",
+  "explosion_sand": "assets/effects/explosions/explosion_sand.svg",
+  "explosion_sand_large": "assets/effects/explosions/explosion_sand_large.svg",
+  "explosion_lab": "assets/effects/explosions/explosion_lab.svg",
+  "explosion_lab_large": "assets/effects/explosions/explosion_lab_large.svg",
+  "explosion_boss_large": "assets/effects/explosions/explosion_boss_large.svg",
+  "explosion_boss_sand": "assets/effects/explosions/explosion_boss_sand.svg",
+  "explosion_boss_lab": "assets/effects/explosions/explosion_boss_lab.svg"
+}

@@ -1,0 +1,17 @@
+{
+  "player_runner_default": "assets/characters/player/player_runner_default.svg",
+  "player_runner_desert": "assets/characters/player/player_runner_desert.svg",
+  "player_runner_stealth": "assets/characters/player/player_runner_stealth.svg",
+  "enemy_street_thug": "assets/characters/enemies/enemy_street_thug.svg",
+  "enemy_drone_scout": "assets/characters/enemies/enemy_drone_scout.svg",
+  "enemy_mutant_hound": "assets/characters/enemies/enemy_mutant_hound.svg",
+  "enemy_sand_raider": "assets/characters/enemies/enemy_sand_raider.svg",
+  "enemy_scorpion_bot": "assets/characters/enemies/enemy_scorpion_bot.svg",
+  "enemy_dune_gunner": "assets/characters/enemies/enemy_dune_gunner.svg",
+  "enemy_lab_guard": "assets/characters/enemies/enemy_lab_guard.svg",
+  "enemy_shock_drone": "assets/characters/enemies/enemy_shock_drone.svg",
+  "enemy_bio_tank": "assets/characters/enemies/enemy_bio_tank.svg",
+  "boss_mech_brute": "assets/characters/bosses/boss_mech_brute.svg",
+  "boss_siege_crawler": "assets/characters/bosses/boss_siege_crawler.svg",
+  "boss_overseer_core": "assets/characters/bosses/boss_overseer_core.svg"
+}

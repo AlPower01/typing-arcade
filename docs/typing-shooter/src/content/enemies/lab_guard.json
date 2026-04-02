@@ -1,0 +1,20 @@
+{
+  "id": "lab_guard",
+  "name": "Lab Guard",
+  "spriteId": "enemy_lab_guard",
+  "animations": {
+    "run": "lab_guard_run",
+    "hit": "lab_guard_hit",
+    "death": "lab_guard_death"
+  },
+  "moveSpeed": 175,
+  "spawnWeight": 4,
+  "wordDifficultyBias": 2,
+  "hitEffectId": "hit_electric",
+  "deathEffectId": "explosion_lab",
+  "tags": [
+    "ground",
+    "guard"
+  ],
+  "specialBehaviorHook": null
+}

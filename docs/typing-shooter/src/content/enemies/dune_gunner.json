@@ -1,0 +1,20 @@
+{
+  "id": "dune_gunner",
+  "name": "Dune Gunner",
+  "spriteId": "enemy_dune_gunner",
+  "animations": {
+    "run": "dune_gunner_run",
+    "hit": "dune_gunner_hit",
+    "death": "dune_gunner_death"
+  },
+  "moveSpeed": 170,
+  "spawnWeight": 3,
+  "wordDifficultyBias": 2,
+  "hitEffectId": "hit_orange",
+  "deathEffectId": "explosion_sand_large",
+  "tags": [
+    "ground",
+    "elite"
+  ],
+  "specialBehaviorHook": null
+}

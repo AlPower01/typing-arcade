@@ -1,0 +1,57 @@
+{
+  "id": "level-01",
+  "name": "City Run",
+  "order": 1,
+  "backgroundId": "bg_city_night",
+  "musicId": "music_city_run",
+  "playerSkinId": "player_runner_default",
+  "enemyPool": [
+    "street_thug",
+    "drone_scout",
+    "mutant_hound"
+  ],
+  "bossId": "boss_mech_brute",
+  "wordPools": {
+    "early": [
+      "easy-common",
+      "level-01-theme"
+    ],
+    "mid": [
+      "medium-common",
+      "level-01-theme"
+    ],
+    "late": [
+      "hard-common",
+      "level-01-theme"
+    ],
+    "boss": [
+      "boss-level-01"
+    ]
+  },
+  "spawnRules": {
+    "baseRate": 1.6,
+    "rateRampPerMinute": 0.7,
+    "maxConcurrentEnemies": 5,
+    "bossSpawnTimeSec": 90
+  },
+  "difficultyRules": {
+    "startWordLength": 3,
+    "maxWordLength": 10,
+    "wordComplexityRamp": 1.0,
+    "enemyVarietyUnlockTimeSec": 45
+  },
+  "scoringRules": {
+    "pointsPerLetterHit": 10,
+    "pointsPerEnemyKill": 50,
+    "pointsPerBossKill": 1000,
+    "comboBonusPerTier": 25
+  },
+  "lifeRules": {
+    "startingLives": 3,
+    "damageOnEnemyReachPlayer": 1
+  },
+  "completionRules": {
+    "bossRequired": true,
+    "autoAdvanceOnBossDefeat": true
+  }
+}

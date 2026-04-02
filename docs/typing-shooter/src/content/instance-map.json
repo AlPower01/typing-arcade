@@ -1,0 +1,62 @@
+{
+  "playerInstances": {
+    "level-01": {
+      "configId": "player_runner_default",
+      "bulletEffectId": "bullet_default"
+    },
+    "level-02": {
+      "configId": "player_runner_desert",
+      "bulletEffectId": "bullet_desert"
+    },
+    "level-03": {
+      "configId": "player_runner_stealth",
+      "bulletEffectId": "bullet_lab"
+    }
+  },
+  "enemyInstances": {
+    "level-01": [
+      "street_thug",
+      "drone_scout",
+      "mutant_hound"
+    ],
+    "level-02": [
+      "sand_raider",
+      "scorpion_bot",
+      "dune_gunner"
+    ],
+    "level-03": [
+      "lab_guard",
+      "shock_drone",
+      "bio_tank"
+    ]
+  },
+  "bossInstances": {
+    "level-01": "boss_mech_brute",
+    "level-02": "boss_siege_crawler",
+    "level-03": "boss_overseer_core"
+  },
+  "effectInstances": {
+    "level-01": {
+      "hit": "hit_small",
+      "death": "explosion_small",
+      "bossDeath": "explosion_boss_large"
+    },
+    "level-02": {
+      "hit": "hit_dust",
+      "death": "explosion_sand",
+      "bossDeath": "explosion_boss_sand"
+    },
+    "level-03": {
+      "hit": "hit_electric",
+      "death": "explosion_lab",
+      "bossDeath": "explosion_boss_lab"
+    }
+  },
+  "uiInstances": {
+    "defaultHud": {
+      "livesStyle": "hearts",
+      "scoreStyle": "numeric",
+      "bossStyle": "banner"
+    }
+  }
+}

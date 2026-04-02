@@ -1,0 +1,20 @@
+{
+  "id": "scorpion_bot",
+  "name": "Scorpion Bot",
+  "spriteId": "enemy_scorpion_bot",
+  "animations": {
+    "run": "scorpion_walk",
+    "hit": "scorpion_hit",
+    "death": "scorpion_pop"
+  },
+  "moveSpeed": 155,
+  "spawnWeight": 4,
+  "wordDifficultyBias": 2,
+  "hitEffectId": "hit_dust",
+  "deathEffectId": "explosion_sand",
+  "tags": [
+    "ground",
+    "armored"
+  ],
+  "specialBehaviorHook": null
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+    <rect width="100%" height="100%" fill="#172554"/>
+    
+        <polygon points="64,10 78,40 114,28 94,58 122,70 90,80 102,114 72,96 64,122 54,96 24,114 36,80 6,70 34,58 14,28 50,40" fill="#22d3ee" />
+        <circle cx="64" cy="64" r="16" fill="#dbeafe" />
+        
+    <text x="64" y="122" text-anchor="middle" font-family="Arial" font-size="12" fill="#dbeafe">Hit</text>
+</svg>

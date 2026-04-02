@@ -1,0 +1,25 @@
+{
+  "id": "boss_siege_crawler",
+  "name": "Siege Crawler",
+  "spriteId": "boss_siege_crawler",
+  "animations": {
+    "intro": "crawler_intro",
+    "idle": "crawler_idle",
+    "hit": "crawler_hit",
+    "death": "crawler_death"
+  },
+  "bossWordMode": "multiPhaseWords",
+  "wordData": {
+    "phases": [
+      "desolation",
+      "fortification"
+    ]
+  },
+  "hitEffectId": "hit_boss_heavy",
+  "deathEffectId": "explosion_boss_sand",
+  "bonusScore": 1200,
+  "behaviorMetadata": {
+    "moveSpeed": 55,
+    "screenHoldPosition": 0.78
+  }
+}
