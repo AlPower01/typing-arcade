@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Racing Dash</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="game-panel">
+        <canvas id="gameCanvas" aria-label="Racing Dash game board"></canvas>
+
+        <div class="bottom-bar">
+          <button id="backButton" class="arcade-button ghost" type="button">Back To Arcade</button>
+          <div class="hud" aria-label="Racing Dash stats">
+            <div class="stat-card">
+              <span class="stat-label">Score</span>
+              <strong id="scoreValue">0</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Lives</span>
+              <strong id="livesValue">3</strong>
+            </div>
+            <div class="stat-card progress-card">
+              <span class="stat-label">Next Word</span>
+              <strong id="progressValue">---</strong>
+            </div>
+          </div>
+        </div>
+
+        <div id="startOverlay" class="overlay is-visible" aria-live="polite">
+          <div class="overlay-card">
+            <img class="start-logo" src="./images/image 67.png" alt="Racing Dash" />
+            <p>Drive into oncoming word obstacles. Type the full word to dodge into a fresh lane before impact.</p>
+            <div class="button-row">
+              <button id="startButton" class="arcade-button" type="button">Start Game</button>
+              <button id="startBackButton" class="arcade-button ghost" type="button">Back To Arcade</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="gameOverOverlay" class="overlay" aria-live="polite">
+          <div class="overlay-card">
+            <p class="overlay-kicker">Run Over</p>
+            <h2>Game Over</h2>
+            <p id="gameOverSummary">Final score: 0</p>
+            <div class="results-grid">
+              <div>
+                <span class="result-label">Best Score</span>
+                <strong id="bestScoreValue">0</strong>
+              </div>
+              <div>
+                <span class="result-label">Dodges</span>
+                <strong id="dodgesValue">0</strong>
+              </div>
+              <div>
+                <span class="result-label">Level</span>
+                <strong id="levelValue">1</strong>
+              </div>
+            </div>
+            <div class="button-row">
+              <button id="restartButton" class="arcade-button" type="button">Restart</button>
+              <button id="gameOverBackButton" class="arcade-button ghost" type="button">Back To Arcade</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="mobile-blocker" role="dialog" aria-modal="true" aria-labelledby="mobileBlockerTitle">
+      <div class="mobile-blocker-card">
+        <p class="mobile-blocker-kicker">Typing Arcade</p>
+        <h2 id="mobileBlockerTitle">Sorry, this doesn&apos;t work on mobile.</h2>
+        <p>Use a larger screen to play this game properly.</p>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

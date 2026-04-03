@@ -10,6 +10,7 @@ const staticDirs = [
   "memory-typing",
   "typing-dash",
   "typing-shooter",
+  "road-dash",
 ];
 
 function copyStandaloneGames() {

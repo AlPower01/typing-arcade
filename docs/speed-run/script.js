@@ -79,8 +79,7 @@ const ui = {
   canvas: document.getElementById("gameCanvas"),
   score: document.getElementById("scoreValue"),
   lives: document.getElementById("livesValue"),
-  level: document.getElementById("levelValue"),
-  streak: document.getElementById("streakValue"),
+  nextWord: document.getElementById("nextWordValue"),
   startOverlay: document.getElementById("startOverlay"),
   gameOverOverlay: document.getElementById("gameOverOverlay"),
   gameOverTitle: document.getElementById("gameOverTitle"),
@@ -90,6 +89,7 @@ const ui = {
   nameEntryForm: document.getElementById("nameEntryForm"),
   nameEntryInput: document.getElementById("nameEntryInput"),
   startButton: document.getElementById("startButton"),
+  startBackButton: document.getElementById("startBackButton"),
   restartButton: document.getElementById("restartButton"),
   restartBackButton: document.getElementById("restartBackButton"),
   backButton: document.getElementById("backButton"),
@@ -484,8 +484,8 @@ class SpeedRunGame {
   updateHud() {
     ui.score.textContent = String(this.score);
     ui.lives.innerHTML = renderLivesMarkup(this.lives);
-    ui.level.textContent = String(this.getLevel());
-    ui.streak.textContent = `${this.streak}/${this.bestStreak}`;
+    const currentObstacle = this.obstacles.find((obstacle) => !obstacle.resolved);
+    ui.nextWord.textContent = currentObstacle ? currentObstacle.word.toUpperCase() : "--";
   }
 
   getLevel() {
@@ -1068,4 +1068,5 @@ ui.restartButton.addEventListener("click", () => {
 });
 
 ui.backButton.addEventListener("click", goBackToArcade);
+ui.startBackButton.addEventListener("click", goBackToArcade);
 ui.restartBackButton.addEventListener("click", goBackToArcade);

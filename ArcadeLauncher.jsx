@@ -68,6 +68,12 @@ const typingGames = [
     metric: "score",
   },
   {
+    id: "road-dash",
+    title: "Racing Dash",
+    thumbnail: withBase("images/games/thumbnail.png"),
+    metric: "score",
+  },
+  {
     id: "typing-dash",
     title: "Typing Dash",
     thumbnail: withBase("images/games/typing_dash.png"),
@@ -101,11 +107,11 @@ function formatLeaderboardDate(dateString) {
   }).format(date);
 }
 
-function GameTile({ game, isActive, onPlay, onSelect }) {
+function GameTile({ game, isActive, onPlay, onSelect, tileRef }) {
   const thumbnailRef = useRef(null);
 
   return (
-    <article className={`game-tile ${isActive ? "is-active" : "is-inactive"}`}>
+    <article ref={tileRef} className={`game-tile ${isActive ? "is-active" : "is-inactive"}`}>
       <button
         ref={thumbnailRef}
         type="button"
@@ -173,6 +179,7 @@ function ArcadeStatsPanel({ game, allScores }) {
     0,
   );
   const topEntry = activeEntries[0] || null;
+  const yourBestEntry = activeEntries.find((entry) => entry?.name?.toUpperCase?.() === "YOU") || null;
   const mostRecentEntry = [...activeEntries]
     .filter((entry) => entry?.date)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
@@ -184,10 +191,6 @@ function ArcadeStatsPanel({ game, allScores }) {
       value: String(totalEntries),
     },
     {
-      label: "Active Boards",
-      value: `${filledBoards}/${typingGames.length}`,
-    },
-    {
       label: topEntry ? "Current Top Player" : "Current Top Player",
       value: topEntry?.name || "--",
     },
@@ -196,12 +199,12 @@ function ArcadeStatsPanel({ game, allScores }) {
       value: topEntry ? formatMetric(topEntry, game.metric) : "--",
     },
     {
-      label: "Latest Result",
-      value: mostRecentEntry ? formatLeaderboardDate(mostRecentEntry.date) : "--",
+      label: "Your Best Score",
+      value: yourBestEntry ? formatMetric(yourBestEntry, game.metric) : "--",
     },
     {
-      label: "Selected Game",
-      value: game.title,
+      label: "Latest Result",
+      value: mostRecentEntry ? formatLeaderboardDate(mostRecentEntry.date) : "--",
     },
   ];
 
@@ -223,13 +226,17 @@ function ArcadeStatsPanel({ game, allScores }) {
 }
 
 export default function ArcadeLauncher() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(2);
   const [activeModalGame, setActiveModalGame] = useState(null);
   const [launchStyle, setLaunchStyle] = useState(null);
   const [musicEnabled, setMusicEnabled] = useState(getStoredMusicEnabled);
   const [bestScores, setBestScores] = useState(getStoredBestScores);
   const musicRef = useRef(null);
+  const gamesStripRef = useRef(null);
+  const tileRefs = useRef([]);
   const hasMountedRef = useRef(false);
+  const homeMusicUnlockedRef = useRef(false);
+  const carouselInitRef = useRef(false);
   const games = useMemo(
     () =>
       typingGames.map((game) => ({
@@ -247,7 +254,8 @@ export default function ArcadeLauncher() {
         event.data?.type === "speed-run:close" ||
         event.data?.type === "memory-typing:close" ||
         event.data?.type === "typing-dash:close" ||
-        event.data?.type === "typing-shooter:close"
+        event.data?.type === "typing-shooter:close" ||
+        event.data?.type === "road-dash:close"
       ) {
         setActiveModalGame(null);
         return;
@@ -275,6 +283,39 @@ export default function ArcadeLauncher() {
 
     audio.pause();
     audio.currentTime = 0;
+  }, [musicEnabled, activeModalGame]);
+
+  useEffect(() => {
+    const audio = musicRef.current;
+    if (!audio || homeMusicUnlockedRef.current) return undefined;
+
+    const unlockHomeMusic = () => {
+      if (
+        homeMusicUnlockedRef.current ||
+        !musicEnabled ||
+        activeModalGame ||
+        document.visibilityState !== "visible"
+      ) {
+        return;
+      }
+
+      homeMusicUnlockedRef.current = true;
+      audio.volume = 0.15;
+      audio.play().catch(() => {});
+      window.removeEventListener("pointerdown", unlockHomeMusic);
+      window.removeEventListener("keydown", unlockHomeMusic);
+      window.removeEventListener("touchstart", unlockHomeMusic);
+    };
+
+    window.addEventListener("pointerdown", unlockHomeMusic);
+    window.addEventListener("keydown", unlockHomeMusic);
+    window.addEventListener("touchstart", unlockHomeMusic, { passive: true });
+
+    return () => {
+      window.removeEventListener("pointerdown", unlockHomeMusic);
+      window.removeEventListener("keydown", unlockHomeMusic);
+      window.removeEventListener("touchstart", unlockHomeMusic);
+    };
   }, [musicEnabled, activeModalGame]);
 
   useEffect(() => {
@@ -326,6 +367,22 @@ export default function ArcadeLauncher() {
     audio.play().catch(() => {});
   }, [activeIndex, activeModalGame]);
 
+  useEffect(() => {
+    const strip = gamesStripRef.current;
+    const tile = tileRefs.current[activeIndex];
+    if (!strip || !tile) return;
+
+    const targetLeft = tile.offsetLeft - (strip.clientWidth - tile.clientWidth) / 2;
+    strip.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: carouselInitRef.current ? "smooth" : "auto",
+    });
+
+    if (!carouselInitRef.current) {
+      carouselInitRef.current = true;
+    }
+  }, [activeIndex]);
+
   const onPlayGame = (gameId, sourceRect = null) => {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
@@ -370,7 +427,11 @@ export default function ArcadeLauncher() {
         <img className="arcade-logo" src={logo} alt="Typing Arcade" />
 
         <section className="arcade-stage">
-          <section className="games-strip" aria-label="Typing games">
+          <section
+            ref={gamesStripRef}
+            className="games-strip"
+            aria-label="Typing games"
+          >
             {games.map((game, index) => (
               <GameTile
                 key={game.id}
@@ -378,6 +439,9 @@ export default function ArcadeLauncher() {
                 isActive={index === activeIndex}
                 onPlay={onPlayGame}
                 onSelect={() => setActiveIndex(index)}
+                tileRef={(node) => {
+                  tileRefs.current[index] = node;
+                }}
               />
             ))}
           </section>
@@ -403,6 +467,8 @@ export default function ArcadeLauncher() {
                       ? withBase("typing-dash/index.html?embed=1")
                     : activeModalGame === "typing-shooter"
                       ? withBase("typing-shooter/index.html?embed=1")
+                    : activeModalGame === "road-dash"
+                      ? withBase("road-dash/index.html?embed=1")
                     : withBase("memory-typing/index.html?embed=1")
                   }
                 title={
@@ -414,6 +480,8 @@ export default function ArcadeLauncher() {
                       ? "Typing Dash"
                     : activeModalGame === "typing-shooter"
                       ? "Typing Shooter"
+                    : activeModalGame === "road-dash"
+                      ? "Racing Dash"
                     : "Memory Typing"
                 }
               />
@@ -556,16 +624,30 @@ const styles = `
   }
 
   .games-strip {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    --tile-width: 228px;
+    display: flex;
     align-items: start;
     gap: 10px;
+    padding-top: 14px;
     margin-bottom: 20px;
+    overflow-x: auto;
+    padding: 14px 50px 10px;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .games-strip::-webkit-scrollbar {
+    display: none;
   }
 
   .game-tile {
     display: block;
-    width: 100%;
+    width: var(--tile-width);
+    min-width: var(--tile-width);
+    flex: 0 0 var(--tile-width);
+    scroll-snap-align: start;
     transition: transform 260ms ease, opacity 260ms ease, filter 260ms ease;
   }
 
@@ -633,7 +715,7 @@ const styles = `
   .tile-footer {
     display: grid;
     min-height: 60px;
-    padding-top: 4px;
+    padding-top: 20px;
   }
 
   .tile-footer-spacer {
@@ -944,25 +1026,13 @@ const styles = `
 
   @media (max-width: 900px) {
     .games-strip {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      scroll-snap-type: x proximity;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .games-strip::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    .games-strip::-webkit-scrollbar-thumb {
-      background: rgba(255, 214, 138, 0.25);
-      border-radius: 999px;
+      --tile-width: min(300px, 42vw);
     }
 
     .game-tile {
-      flex: 0 0 min(300px, 42vw);
+      flex: 0 0 var(--tile-width);
+      width: var(--tile-width);
+      min-width: var(--tile-width);
       scroll-snap-align: start;
     }
 
@@ -986,12 +1056,13 @@ const styles = `
     }
 
     .games-strip {
+      --tile-width: min(240px, 68vw);
       gap: 8px;
       margin-bottom: 16px;
     }
 
     .game-tile {
-      flex-basis: min(240px, 68vw);
+      flex-basis: var(--tile-width);
     }
 
     .game-tile.is-inactive {

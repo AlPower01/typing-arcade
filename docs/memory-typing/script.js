@@ -74,6 +74,7 @@ const ui = {
   nameEntryForm: document.getElementById("nameEntryForm"),
   nameEntryInput: document.getElementById("nameEntryInput"),
   startButton: document.getElementById("startButton"),
+  startBackButton: document.getElementById("startBackButton"),
   restartButton: document.getElementById("restartButton"),
   restartBackButton: document.getElementById("restartBackButton"),
   backButton: document.getElementById("backButton"),
@@ -508,6 +509,7 @@ ui.restartButton.addEventListener("click", () => {
 });
 
 ui.backButton.addEventListener("click", goBackToArcade);
+ui.startBackButton.addEventListener("click", goBackToArcade);
 ui.restartBackButton.addEventListener("click", goBackToArcade);
 
 document.addEventListener("visibilitychange", () => {

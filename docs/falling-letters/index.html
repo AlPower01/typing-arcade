@@ -41,22 +41,20 @@
               <strong id="livesValue"></strong>
             </div>
             <div class="stat-card">
-              <span class="stat-label">Level</span>
-              <strong id="levelValue">1</strong>
-            </div>
-            <div class="stat-card">
-              <span class="stat-label">Streak</span>
-              <strong id="streakValue">0</strong>
+              <span class="stat-label">Next Word</span>
+              <strong id="nextWordValue">--</strong>
             </div>
           </div>
         </div>
 
         <div id="startOverlay" class="overlay is-visible">
           <div class="overlay-card">
-            <p class="overlay-kicker">Ready Player One</p>
             <img class="start-logo" src="./logo.png" alt="Falling Letters" />
             <p>Type each falling word before it slams into the ground.</p>
-            <button id="startButton" class="arcade-button" type="button">Start Game</button>
+            <div class="button-row">
+              <button id="startButton" class="arcade-button" type="button">Start Game</button>
+              <button id="startBackButton" class="arcade-button ghost" type="button">Back To Arcade</button>
+            </div>
           </div>
         </div>
 

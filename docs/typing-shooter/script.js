@@ -92,10 +92,10 @@ const ui = {
   canvas: document.getElementById("gameCanvas"),
   score: document.getElementById("scoreValue"),
   lives: document.getElementById("livesValue"),
-  wave: document.getElementById("waveValue"),
   target: document.getElementById("targetValue"),
   startOverlay: document.getElementById("startOverlay"),
   startButton: document.getElementById("startButton"),
+  startBackButton: document.getElementById("startBackButton"),
   backButton: document.getElementById("backButton"),
   topbar: document.getElementById("topbar"),
   bossBanner: document.getElementById("bossBanner"),
@@ -867,7 +867,6 @@ class TypingShooterGame {
 
   updateHud() {
     ui.score.textContent = formatScore(this.score);
-    ui.wave.textContent = String(1 + Math.floor(this.elapsedSeconds / 20));
     ui.target.textContent = this.getCurrentTarget()?.word.toUpperCase() || "--";
     this.renderLives();
   }
@@ -1191,6 +1190,7 @@ ui.restartButton.addEventListener("click", () => {
 });
 
 ui.backButton.addEventListener("click", goBackToArcade);
+ui.startBackButton.addEventListener("click", goBackToArcade);
 ui.restartBackButton.addEventListener("click", goBackToArcade);
 
 ui.nameEntryForm.addEventListener("submit", (event) => {

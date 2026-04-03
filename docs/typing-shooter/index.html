@@ -37,11 +37,7 @@
               <strong id="livesValue"></strong>
             </div>
             <div class="stat-card">
-              <span class="stat-label">Wave</span>
-              <strong id="waveValue">1</strong>
-            </div>
-            <div class="stat-card">
-              <span class="stat-label">Target</span>
+              <span class="stat-label">Next Word</span>
               <strong id="targetValue">--</strong>
             </div>
           </div>
@@ -65,10 +61,12 @@
 
         <div id="startOverlay" class="overlay" aria-live="polite">
           <div class="overlay-card">
-            <p class="overlay-kicker">City Run // Level 1</p>
             <img class="start-logo" src="../images/typing_shooter_logo.png" alt="Typing Shooter" />
             <p>Pick off enemies by typing their words. Each correct letter fires a shot. Survive to face the boss.</p>
-            <button id="startButton" class="arcade-button" type="button">Start Mission</button>
+            <div class="button-row">
+              <button id="startButton" class="arcade-button" type="button">Start Game</button>
+              <button id="startBackButton" class="arcade-button ghost" type="button">Back To Arcade</button>
+            </div>
           </div>
         </div>
 
